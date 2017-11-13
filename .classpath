@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.8.0_101"/>
-	<classpathentry kind="lib" path="E:/Maven/repo/org/freemarker/freemarker/2.3.23/freemarker-2.3.23.jar"/>
-	<classpathentry kind="lib" path="C:/Users/zjhzwukan/Desktop/mybatis-gen-demo/generatetool/lib/mysql-connector-java-5.1.35.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="E:/maven/repo/org/freemarker/freemarker/2.3.23/freemarker-2.3.23.jar"/>
+	<classpathentry kind="lib" path="E:/maven/repo/mysql/mysql-connector-java/5.1.35/mysql-connector-java-5.1.35.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

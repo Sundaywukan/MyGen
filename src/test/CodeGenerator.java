@@ -9,11 +9,10 @@ public class CodeGenerator {
 
     public static void main(String[] args) {
         try {
-			new Gen("zzzz", "Zzzz").gen();
+			new Gen("", "Article","article","cc.innosoft.cloudshare","cc/innosoft/cloudshare").gen();
 		} catch (IOException | TemplateException e) {
 			e.printStackTrace();
 		};
     }
 
-   
 }

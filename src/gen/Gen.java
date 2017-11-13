@@ -50,9 +50,13 @@ public class Gen {
 
 	private String modelName;
 
-	private static final String PACKNAME = "com.rongdu.azp";
+	private String PACKNAME;
 
-	public Gen(String modelName, String calssName) {
+	private String PACKNAME_PATH;
+	
+	private String mappingPath;
+
+	public Gen(String modelName, String calssName, String mappingPath,String packName, String packageNamePath) {
 		this.curDir = System.getProperty("user.dir");
 		// 把路径中\转为/
 		this.curDir = this.curDir.replace('\\', '/');
@@ -65,6 +69,11 @@ public class Gen {
 		controllerName = calssName + "Controller";
 		mapperName = calssName + "Mapper";
 		className = calssName;
+
+		this.PACKNAME = packName;
+		this.PACKNAME_PATH = packageNamePath;
+		
+		this.mappingPath =mappingPath;
 	}
 
 	public void gen() throws IOException, TemplateException {
@@ -78,7 +87,7 @@ public class Gen {
 		root.put("author", "wuk");
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd hh:mm");
 		root.put("createDate", sdf.format(new Date()));
-		String fileName = curDir + "/src/service/" + modelName;
+		String fileName = curDir + "/src/" + PACKNAME_PATH + "/service/" + modelName;
 		String template = "Service.ftl";
 		mkFile(fileName, root, template, serviceName + ".java");
 
@@ -94,12 +103,13 @@ public class Gen {
 		root.put("mapperVar", mapperName.substring(0, 1).toLowerCase() + mapperName.substring(1));
 		root.put("author", "wuk");
 		root.put("createDate", sdf.format(new Date()));
-		fileName = curDir + "/src/service/impl/" + modelName;
+		fileName = curDir + "/src/" + PACKNAME_PATH + "/service/impl/" + modelName;
 		template = "ServiceImpl.ftl";
 		mkFile(fileName, root, template, serviceImplName + ".java");
 
 		// 生成Controller
 		root.clear();
+		root.put("mappingPath", mappingPath);
 		root.put("packageName", PACKNAME);
 		root.put("controllerName", controllerName);
 		root.put("author", "wuk");
@@ -108,10 +118,10 @@ public class Gen {
 		root.put("serviceVar", serviceName.substring(0, 1).toLowerCase() + serviceName.substring(1));
 		root.put("modelName", modelName);
 		root.put("className", className);
-		fileName = curDir + "/src/controller/" + modelName;
+		fileName = curDir + "/src/" + PACKNAME_PATH + "/controller/" + modelName;
 		template = "Controller.ftl";
 		mkFile(fileName, root, template, controllerName + ".java");
-		
+
 		// 生成Mapper
 		root.clear();
 		root.put("packageName", PACKNAME);
@@ -120,37 +130,37 @@ public class Gen {
 		root.put("modelName", modelName);
 		root.put("mapperName", mapperName);
 		root.put("className", className);
-		fileName = curDir + "/src/mapper/" + modelName;
+		fileName = curDir + "/src/" + PACKNAME_PATH + "/mapper/" + modelName;
 		template = "Mapper.ftl";
 		mkFile(fileName, root, template, mapperName + ".java");
-		
-		
-		//生成Req
+
+		// 生成Req
 		root.clear();
 		root = new DatebaseConn().BuilMap(root);
 		root.put("packageName", PACKNAME);
 		root.put("author", "wuk");
 		root.put("modelName", modelName);
 		root.put("createDate", sdf.format(new Date()));
-		root.put("className", className+"createReq");
-		fileName = curDir + "/src/vo/req/" + modelName;
+		root.put("className", className + "CreateReq");
+		fileName = curDir + "/src/" + PACKNAME_PATH + "/vo/req/" + modelName;
 		template = "CreateReq.ftl";
-		mkFile(fileName, root, template, className+"createReq" + ".java");
+		mkFile(fileName, root, template, className + "CreateReq" + ".java");
 		root.clear();
 		root = new DatebaseConn().BuilMap(root);
 		root.put("packageName", PACKNAME);
 		root.put("author", "wuk");
 		root.put("modelName", modelName);
 		root.put("createDate", sdf.format(new Date()));
-		root.put("className", className+"updateReq");
-		fileName = curDir + "/src/vo/req/" + modelName;
+		root.put("className", className + "UpdateReq");
+		fileName = curDir + "/src/" + PACKNAME_PATH + "/vo/req/" + modelName;
 		template = "CreateReq.ftl";
-		mkFile(fileName, root, template, className +"updateReq" + ".java");
-		
+		mkFile(fileName, root, template, className + "UpdateReq" + ".java");
+
 		System.out.println("gen code success!");
 	}
 
-	public void mkFile(String fileName, Map<String, Object> root, String template, String className) throws TemplateException, IOException {
+	public void mkFile(String fileName, Map<String, Object> root, String template, String className)
+			throws TemplateException, IOException {
 		Configuration cfg = new Configuration(Configuration.VERSION_2_3_22);
 		// 设置引用模板地址
 		try {
@@ -170,6 +180,6 @@ public class Gen {
 		temp.process(root, out);
 		fos.flush();
 		fos.close();
-		System.out.println("生成"+className+"成功!");
+		System.out.println("生成" + className + "成功!");
 	}
 }

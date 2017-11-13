@@ -1,8 +1,8 @@
-package ${packageName}.service.${modelName};
+package ${packageName}.service;
 
-import com.rongdu.azp.base.BaseService;
+import ${packageName}.base.BaseService;
 import ${packageName}.domain.${className};
-import ${packageName}.vo.req.${modelName}.${className}CreateReq;
+import ${packageName}.vo.${className}CreateReq;
 
 /**
  * @author ${author}

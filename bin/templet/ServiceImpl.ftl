@@ -1,4 +1,4 @@
-package ${packageName}.service.impl.${modelName};
+package ${packageName}.service.impl;
 
 import ${packageName}.domain.${className};
 import ${packageName}.mapper.${mapperName};
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 
 import ${packageName}.base.BaseMapper;
 import ${packageName}.base.BaseServiceImpl;
-import ${packageName}.service.${modelName}.${serviceName};
-import ${packageName}.vo.req.${modelName}.${className}CreateReq;
+import ${packageName}.service.${serviceName};
+import ${packageName}.vo.${className}CreateReq;
 import ${packageName}.exception.BusinessException;
 import ${packageName}.constant.ResultMsg;
 import ${packageName}.util.BeanUtil;

@@ -1,4 +1,4 @@
-package ${packageName}.controller.${modelName};
+package ${packageName}.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,12 +16,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import ${packageName}.controller.BaseController;
 import ${packageName}.domain.${className};
-import ${packageName}.service.${modelName}.${serviceName};
+import ${packageName}.service.${serviceName};
 import ${packageName}.util.BeanUtil;
 import ${packageName}.util.JsonUtil;
-import ${packageName}.vo.req.${modelName}.${className}CreateReq;
-//import ${packageName}.vo.req.${modelName}.${className}DeleteReq;
-import ${packageName}.vo.req.${modelName}.${className}UpdateReq;
+import ${packageName}.vo.${className}CreateReq;
+//import ${packageName}.vo.${className}DeleteReq;
+import ${packageName}.vo.req.${className}UpdateReq;
 
 /**
  * @author ${author}
@@ -35,20 +35,20 @@ public class ${controllerName} extends BaseController{
 	@Resource
 	private ${serviceName} ${serviceVar};
 	
-	@RequestMapping(value="/${modelName}/${className}/create",method=RequestMethod.POST)
+	@RequestMapping(value="/${mappingPath}/create",method=RequestMethod.POST)
 	@ResponseBody
-	public JSON createLock(@RequestBody @Valid ${className}CreateReq req){
+	public JSON create${className}(@RequestBody @Valid ${className}CreateReq req,HttpSession session){
 	    ${serviceVar}.save(req);
 		return JsonUtil.newJson().toJson();
 	}
 	
-	/*@RequestMapping(value="/${modelName}/${className}/delete",method=RequestMethod.POST)
+	/*@RequestMapping(value="/${modelName}/delete",method=RequestMethod.POST)
 	@ResponseBody
 	public JSON deleteLock(@RequestBody @Valid ${className}DeleteReq req){
 		return JsonUtil.newJson().addData("data", ${serviceVar}.delete(req.getId())).toJson();
 	}
 	
-	@RequestMapping(value="/${modelName}/${className}/update",method=RequestMethod.POST)
+	@RequestMapping(value="/${modelName}/update",method=RequestMethod.POST)
 	@ResponseBody
 	public JSON updateLock(@RequestBody @Valid ${className}UpdateReq req){
 		HashMap<String, Object> map=BeanUtil.transBean2Map(req);

@@ -36,7 +36,7 @@ public class DatebaseConn {
 		// 驱动程序名
 		String driver = "com.mysql.jdbc.Driver";
 		// URL指向要访问的数据库名mydata
-		String url = "jdbc:mysql://192.168.0.107:3306/aizupai";
+		String url = "jdbc:mysql://192.168.0.107:3306/cloudshare";
 		// MySQL配置时的用户名
 		String user = "root";
 		// MySQL配置时的密码
@@ -68,7 +68,7 @@ public class DatebaseConn {
 	public Map<String, Object> BuilMap(Map<String, Object> root) {
 		DatebaseConn c = new DatebaseConn();
 		Connection conn = c.ConnectionBuiler();
-		String sql = "select * from zzzz";
+		String sql = "select * from article";
 		PreparedStatement stmt;
 		try {
 			stmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -79,17 +79,21 @@ public class DatebaseConn {
 				// 获得指定列的列名
 				String columnName = data.getColumnName(i);
 				// 对应数据类型的类
-				String columnClassName = data.getColumnClassName(i);	
+				String columnClassName = data.getColumnClassName(i);
+				if(columnClassName=="java.sql.Timestamp") {
+					columnClassName="java.util.Date";
+				}
 				System.out.println("获得列" + i + "的字段名称:" + columnName);
 				System.out.println("获得列" + i + "对应数据类型的类:" + columnClassName);
 				HashMap<String, Object> temp=new HashMap<String, Object>();
+				columnName=underlineToCamel(columnName);
 				temp.put("name", columnName);
 				temp.put("typeClass", columnClassName);
 		        String[] type = columnClassName.split("\\.");
 		        temp.put("type", type[type.length-1]);
+
 		        attr_list.add(temp);
-		       
-		        
+ 
 			}
 			 root.put("cols", attr_list);
 		} catch (SQLException e) {
@@ -97,5 +101,24 @@ public class DatebaseConn {
 		}
 		return root;
 	}
+	public static final char UNDERLINE = '_';
+	public static String underlineToCamel(String param) {
+        if (param == null || "".equals(param.trim())) {
+            return "";
+        }
+        int len = param.length();
+        StringBuilder sb = new StringBuilder(len);
+        for (int i = 0; i < len; i++) {
+            char c = param.charAt(i);
+            if (c == UNDERLINE) {
+                if (++i < len) {
+                    sb.append(Character.toUpperCase(param.charAt(i)));
+                }
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
 
 }

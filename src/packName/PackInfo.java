@@ -17,6 +17,6 @@ package packName;
  */
 public class PackInfo {
 	
-	public static final String PACKNAME="com.rongdu.azp";
+	public static final String PACKNAME="cc.innosoft.cloudshare";
 
 }

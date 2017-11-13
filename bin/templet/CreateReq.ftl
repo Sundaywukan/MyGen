@@ -1,4 +1,4 @@
-package ${packageName}.vo.req.${modelName};
+package ${packageName}.vo.req;
 
 <#list cols as col> 
 import ${col.typeClass};
