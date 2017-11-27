@@ -1,8 +1,8 @@
-package ${packageName}.service;
+package ${packageName}.service.${modelName};
 
 import ${packageName}.base.BaseService;
 import ${packageName}.domain.${className};
-import ${packageName}.vo.${className}CreateReq;
+import ${packageName}.vo.req.${modelName}.${className}CreateReq;
 
 /**
  * @author ${author}

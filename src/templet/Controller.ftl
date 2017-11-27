@@ -1,4 +1,4 @@
-package ${packageName}.controller;
+package ${packageName}.controller.${modelName};
 
 import java.util.HashMap;
 import java.util.List;
@@ -17,11 +17,11 @@ import com.alibaba.fastjson.JSON;
 import ${packageName}.controller.BaseController;
 import ${packageName}.domain.${className};
 import ${packageName}.service.${serviceName};
-import ${packageName}.util.BeanUtil;
+import ${packageName}.util.BeanUitl;
 import ${packageName}.util.JsonUtil;
-import ${packageName}.vo.${className}CreateReq;
+import ${packageName}.vo.req.${modelName}.${className}CreateReq;
 //import ${packageName}.vo.${className}DeleteReq;
-import ${packageName}.vo.req.${className}UpdateReq;
+import ${packageName}.vo.req.${modelName}.${className}UpdateReq;
 
 /**
  * @author ${author}

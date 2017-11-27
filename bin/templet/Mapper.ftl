@@ -1,4 +1,4 @@
-package ${packageName}.mapper.${modelName};
+package ${packageName}.mapper;
 
 import ${packageName}.base.BaseMapper;
 import ${packageName}.domain.${className};
@@ -10,4 +10,5 @@ import ${packageName}.domain.${className};
  */
 public interface ${mapperName} extends BaseMapper<${className}> {
 
+    int deleteByPrimaryKey(Integer id);
 }

@@ -1,4 +1,4 @@
-package ${packageName}.service.impl;
+package ${packageName}.service.impl.${modelName};
 
 import ${packageName}.domain.${className};
 import ${packageName}.mapper.${mapperName};
@@ -10,10 +10,10 @@ import org.springframework.stereotype.Service;
 import ${packageName}.base.BaseMapper;
 import ${packageName}.base.BaseServiceImpl;
 import ${packageName}.service.${serviceName};
-import ${packageName}.vo.${className}CreateReq;
+import ${packageName}.vo.req.${modelName}.${className}CreateReq;
 import ${packageName}.exception.BusinessException;
 import ${packageName}.constant.ResultMsg;
-import ${packageName}.util.BeanUtil;
+import ${packageName}.util.BeanUitl;
 
 
 /**
@@ -35,7 +35,7 @@ public class ${serviceImplName} extends BaseServiceImpl<${className}> implements
 	@Override
 	public void save(${className}CreateReq req) {
 		${className} ${classVar}=new ${className}();
-		BeanUtil.copyProperties(${classVar}, req);
+		BeanUitl.copyProperties(${classVar}, req);
 		if(${mapperVar}.save(${classVar})!=1){
 			throw new BusinessException(ResultMsg.SAVE_ERROR);
 		}	

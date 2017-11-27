@@ -36,7 +36,7 @@ public class DatebaseConn {
 		// 驱动程序名
 		String driver = "com.mysql.jdbc.Driver";
 		// URL指向要访问的数据库名mydata
-		String url = "jdbc:mysql://192.168.0.107:3306/cloudshare";
+		String url = "jdbc:mysql://192.168.0.107:3306/thirdchat";
 		// MySQL配置时的用户名
 		String user = "root";
 		// MySQL配置时的密码
@@ -68,7 +68,7 @@ public class DatebaseConn {
 	public Map<String, Object> BuilMap(Map<String, Object> root) {
 		DatebaseConn c = new DatebaseConn();
 		Connection conn = c.ConnectionBuiler();
-		String sql = "select * from article";
+		String sql = "select * from thirdchat_group";
 		PreparedStatement stmt;
 		try {
 			stmt = (PreparedStatement) conn.prepareStatement(sql);
@@ -88,14 +88,20 @@ public class DatebaseConn {
 				HashMap<String, Object> temp=new HashMap<String, Object>();
 				columnName=underlineToCamel(columnName);
 				temp.put("name", columnName);
-				temp.put("typeClass", columnClassName);
 		        String[] type = columnClassName.split("\\.");
 		        temp.put("type", type[type.length-1]);
-
+		        temp.put("typeClass", columnClassName);
 		        attr_list.add(temp);
  
 			}
 			 root.put("cols", attr_list);
+			 ArrayList<String> typeList = new ArrayList<>();
+			 for(HashMap<String, Object> map:attr_list) {
+				 if(!typeList.contains(map.get("typeClass"))) {
+					 typeList.add((String) map.get("typeClass"));
+				 }
+			 }
+			 root.put("cols_type", typeList);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}

@@ -1,7 +1,7 @@
-package ${packageName}.vo.req;
+package ${packageName}.vo.req.${modelName};
 
-<#list cols as col> 
-import ${col.typeClass};
+<#list cols_type as type> 
+import ${type};
 </#list>
 
 
