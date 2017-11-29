@@ -1,12 +1,6 @@
-/generator/
+/org/
 /packName/
 /test/
-/org/
 /cc/
 /mybatis/
-/controller/
-/mapper/
-/service/
-/vo/
 /gen/
-/templet/

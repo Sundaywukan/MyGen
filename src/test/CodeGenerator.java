@@ -34,6 +34,10 @@ public class CodeGenerator {
 		String packageNamePath="";
 		for(Context context:contexts) {
 			String s = context.getJavaClientGeneratorConfiguration().getTargetPackage();
+			String sqlUrl=context.getJdbcConnectionConfiguration().getConnectionURL();
+			String sqlDriver=context.getJdbcConnectionConfiguration().getDriverClass();
+			String sqlUsername=context.getJdbcConnectionConfiguration().getUserId();
+			String sqlPassword=context.getJdbcConnectionConfiguration().getPassword();
 			String[] s1 = s.split(".mapper");
 		    for(String s11:s1) {
 		    	packageNamePath=s11;
@@ -42,7 +46,7 @@ public class CodeGenerator {
 		    for(TableConfiguration table:tables) {
 		    	String domainObjectName=table.getDomainObjectName();
 		    	try {
-					new Gen(domainObjectName.substring(0, 1).toLowerCase()+domainObjectName.substring(1), domainObjectName,domainObjectName,packageNamePath,packageNamePath.replace(".", "/")).gen();
+					new Gen(domainObjectName.substring(0, 1).toLowerCase()+domainObjectName.substring(1), domainObjectName,domainObjectName,packageNamePath,packageNamePath.replace(".", "/"),sqlUrl,sqlDriver,sqlUsername,sqlPassword).gen();
 				} catch (IOException | TemplateException e) {
 					e.printStackTrace();
 				};

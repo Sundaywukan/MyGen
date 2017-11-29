@@ -29,18 +29,12 @@ import java.util.Map;
 import com.mysql.jdbc.PreparedStatement;
 
 public class DatebaseConn {
+	
 
-	public Connection ConnectionBuiler() {
+
+	public Connection ConnectionBuiler(String url,String driver,String user,String password) {
 		// 声明Connection对象
 		Connection con;
-		// 驱动程序名
-		String driver = "com.mysql.jdbc.Driver";
-		// URL指向要访问的数据库名mydata
-		String url = "jdbc:mysql://192.168.0.107:3306/thirdchat";
-		// MySQL配置时的用户名
-		String user = "root";
-		// MySQL配置时的密码
-		String password = "123456";
 		// 遍历查询结果集
 		try {
 			// 加载驱动程序
@@ -65,9 +59,9 @@ public class DatebaseConn {
 		return null;
 	}
 
-	public Map<String, Object> BuilMap(Map<String, Object> root) {
+	public Map<String, Object> BuilMap(Map<String, Object> root,String url,String driver,String user,String password) {
 		DatebaseConn c = new DatebaseConn();
-		Connection conn = c.ConnectionBuiler();
+		Connection conn = c.ConnectionBuiler(url,driver,user,password);
 		String sql = "select * from thirdchat_group";
 		PreparedStatement stmt;
 		try {

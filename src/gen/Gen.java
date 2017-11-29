@@ -53,10 +53,15 @@ public class Gen {
 	private String PACKNAME;
 
 	private String PACKNAME_PATH;
-	
+
 	private String mappingPath;
 
-	public Gen(String modelName, String calssName, String mappingPath,String packName, String packageNamePath) {
+	private String sqlUrl;
+	private String sqlDriver;
+	private String sqlUsername;
+	private String sqlPassword;
+
+	public Gen(String modelName, String calssName, String mappingPath, String packName, String packageNamePath,String sqlUrl,String sqlDriver,String sqlUsername,String sqlPassword) {
 		this.curDir = System.getProperty("user.dir");
 		// 把路径中\转为/
 		this.curDir = this.curDir.replace('\\', '/');
@@ -72,8 +77,13 @@ public class Gen {
 
 		this.PACKNAME = packName;
 		this.PACKNAME_PATH = packageNamePath;
+
+		this.mappingPath = mappingPath;
 		
-		this.mappingPath =mappingPath;
+		this.sqlUrl=sqlUrl;
+		this.sqlDriver=sqlDriver;
+		this.sqlUsername=sqlUsername;
+		this.sqlPassword=sqlPassword;
 	}
 
 	public void gen() throws IOException, TemplateException {
@@ -130,13 +140,13 @@ public class Gen {
 		root.put("modelName", modelName);
 		root.put("mapperName", mapperName);
 		root.put("className", className);
-		fileName = curDir + "/src/" + PACKNAME_PATH + "/mapper/" + modelName;
+		fileName = curDir + "/src/" + PACKNAME_PATH + "/mapper";
 		template = "Mapper.ftl";
 		mkFile(fileName, root, template, mapperName + ".java");
 
 		// 生成Req
 		root.clear();
-		root = new DatebaseConn().BuilMap(root);
+		root = new DatebaseConn().BuilMap(root,sqlUrl,sqlDriver,sqlUsername,sqlPassword);
 		root.put("packageName", PACKNAME);
 		root.put("author", "wuk");
 		root.put("modelName", modelName);
@@ -146,7 +156,7 @@ public class Gen {
 		template = "CreateReq.ftl";
 		mkFile(fileName, root, template, className + "CreateReq" + ".java");
 		root.clear();
-		root = new DatebaseConn().BuilMap(root);
+		root = new DatebaseConn().BuilMap(root,sqlUrl,sqlDriver,sqlUsername,sqlPassword);
 		root.put("packageName", PACKNAME);
 		root.put("author", "wuk");
 		root.put("modelName", modelName);
